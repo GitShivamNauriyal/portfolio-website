@@ -1,0 +1,476 @@
+/* ═══════════════════════════════════════════════════════════
+   FONTS — must come before @import "tailwindcss"
+   ═══════════════════════════════════════════════════════════ */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════
+   TAILWIND v4 THEME — CSS-first config
+   ═══════════════════════════════════════════════════════════ */
+@theme {
+  --font-heading: "Outfit", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-text: var(--c-text);
+  --color-muted: var(--c-muted);
+  --color-accent-green: var(--c-green);
+  --color-accent-orange: var(--c-orange);
+  --color-line: var(--c-line);
+  --color-glass-bg: var(--c-glass-bg);
+  --color-glass-border: var(--c-glass-border);
+  --color-glass-shadow: var(--c-glass-shadow);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CSS CUSTOM PROPERTIES — DARK (default)
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --c-bg: #080808;
+  --c-surface: #111111;
+  --c-text: #F0F0F0;
+  --c-muted: #666666;
+  --c-green: #22C55E;
+  --c-orange: #F97316;
+  --c-line: rgba(255, 255, 255, 0.06);
+  --c-glass-bg: rgba(255, 255, 255, 0.04);
+  --c-glass-border: rgba(255, 255, 255, 0.08);
+  --c-glass-shadow: rgba(0, 0, 0, 0.3);
+  --c-glass-hover-border: rgba(255, 255, 255, 0.15);
+  --c-glass-hover-shadow: rgba(0, 0, 0, 0.5);
+  --c-cursor: #F0F0F0;
+
+  color-scheme: dark;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT MODE
+   ═══════════════════════════════════════════════════════════ */
+:root.light {
+  --c-bg: #F8F8F5;
+  --c-surface: #FFFFFF;
+  --c-text: #0A0A0A;
+  --c-muted: #999999;
+  --c-green: #16A34A;
+  --c-orange: #EA6C00;
+  --c-line: rgba(0, 0, 0, 0.05);
+  --c-glass-bg: rgba(255, 255, 255, 0.55);
+  --c-glass-border: rgba(0, 0, 0, 0.08);
+  --c-glass-shadow: rgba(0, 0, 0, 0.08);
+  --c-glass-hover-border: rgba(0, 0, 0, 0.15);
+  --c-glass-hover-shadow: rgba(0, 0, 0, 0.15);
+  --c-cursor: #0A0A0A;
+
+  color-scheme: light;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════════════════════ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  overflow-x: hidden;
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Noise grain overlay for cinematic texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLLBAR
+   ═══════════════════════════════════════════════════════════ */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--c-glass-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--c-muted);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+.text-hero {
+  font-size: clamp(56px, 9vw, 112px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.text-section-title {
+  font-size: clamp(32px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.text-mono {
+  font-family: var(--font-mono);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIQUID GLASS
+   ═══════════════════════════════════════════════════════════ */
+.glass {
+  background: var(--c-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--c-glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--c-glass-shadow);
+  transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  border-color: var(--c-glass-hover-border);
+  box-shadow: 0 12px 48px var(--c-glass-hover-shadow);
+}
+
+.glass-nav {
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid transparent;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-nav.scrolled {
+  background: var(--c-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-color: var(--c-glass-border);
+  box-shadow: 0 4px 24px var(--c-glass-shadow);
+}
+
+.glass-pill {
+  background: var(--c-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--c-glass-border);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--c-muted);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.glass-pill:hover {
+  border-color: var(--c-glass-hover-border);
+  color: var(--c-text);
+}
+
+.glass-dashed {
+  background: var(--c-glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1.5px dashed var(--c-glass-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--c-glass-shadow);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GRID BACKGROUND
+   ═══════════════════════════════════════════════════════════ */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--c-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--c-line) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 20%, transparent 70%);
+}
+
+/* Hero section glow effects */
+.hero-glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-glow-orange {
+  background: var(--c-orange);
+  top: 20%;
+  right: 15%;
+  opacity: 0.08;
+}
+
+.hero-glow-green {
+  background: var(--c-green);
+  bottom: 30%;
+  left: 10%;
+  opacity: 0.06;
+}
+
+/* CTA button enhancements */
+.cta-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cta-primary:hover::before {
+  opacity: 1;
+}
+
+/* Section divider gradient */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-glass-border), transparent);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   STATUS DOT (green pulse)
+   ═══════════════════════════════════════════════════════════ */
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--c-green);
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.status-dot::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--c-green);
+  opacity: 0.4;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCROLL INDICATOR
+   ═══════════════════════════════════════════════════════════ */
+.scroll-indicator {
+  animation: scroll-bounce 2.5s ease-in-out infinite;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(12px); opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TYPEWRITER CURSOR
+   ═══════════════════════════════════════════════════════════ */
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--c-orange);
+  margin-left: 4px;
+  animation: blink 1s steps(1) infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   IN-PROGRESS PULSE RING
+   ═══════════════════════════════════════════════════════════ */
+.wip-ring {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c-green);
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  animation: wip-pulse 2s ease-out infinite;
+}
+
+@keyframes wip-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+  70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTION UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+.section-padding {
+  padding: 120px 24px;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 160px 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-padding {
+    padding: 200px 80px;
+  }
+}
+
+.section-max {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SELECTION
+   ═══════════════════════════════════════════════════════════ */
+::selection {
+  background: var(--c-orange);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TIER BADGE
+   ═══════════════════════════════════════════════════════════ */
+.tier-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CERT LOGO SPIN
+   ═══════════════════════════════════════════════════════════ */
+.cert-logo {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cert-card:hover .cert-logo {
+  transform: rotate(360deg);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CUSTOM CURSOR (hidden on touch)
+   ═══════════════════════════════════════════════════════════ */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+
+  a, button, [data-hoverable] {
+    cursor: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* Horizontal scroll section pin */
+.horizontal-scroll-wrapper {
+  overflow: hidden;
+}
+
+/* Project modal overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAGNETIC BUTTON
+   ═══════════════════════════════════════════════════════════ */
+.magnetic-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--c-text);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.magnetic-btn:hover {
+  color: var(--c-orange);
+}

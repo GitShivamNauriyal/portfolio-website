@@ -1,0 +1,72 @@
+export const skillCategories = [
+  {
+    category: "Languages",
+    skills: ["C", "C++", "Python", "SQL", "JavaScript", "Java"],
+  },
+  {
+    category: "Systems & Infrastructure",
+    skills: [
+      "OS Internals",
+      "Linux Kernel Modules",
+      "System Call Hooking",
+      "Multithreading & Concurrency",
+      "Memory Management (mmap)",
+      "POSIX APIs",
+      "Network Sockets",
+      "Docker",
+    ],
+  },
+  {
+    category: "Databases & Storage",
+    skills: [
+      "PostgreSQL",
+      "Redis",
+      "LSM Trees",
+      "DB Engine Architecture",
+      "Distributed Query Execution",
+    ],
+  },
+  {
+    category: "Machine Learning & AI",
+    skills: [
+      "Computer Vision",
+      "Deep Learning",
+      "CNNs",
+      "YOLOv8",
+      "PyTorch",
+      "TensorFlow",
+      "OpenCV",
+      "Scikit-learn",
+      "XGBoost",
+      "Predictive Modeling",
+      "SMOTE",
+    ],
+  },
+  {
+    category: "Networking & Security",
+    skills: [
+      "TCP/IP",
+      "OSI Model",
+      "Packet Sniffing (Scapy)",
+      "Intrusion Detection",
+      "Cryptography",
+      "Wireshark",
+    ],
+  },
+  {
+    category: "Tools & Environments",
+    skills: [
+      "Linux/Unix CLI",
+      "Neovim",
+      "Git",
+      "GDB",
+      "Valgrind",
+      "Postman",
+      "gRPC",
+      "FastAPI",
+      "Express.js",
+      "React.js",
+      "Next.js",
+    ],
+  },
+];
