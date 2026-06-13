@@ -55,7 +55,6 @@ export default function Hero() {
   const nameRef = useRef(null);
   const gridRef = useRef(null);
 
-  // GSAP: character stagger reveal for name
   useEffect(() => {
     const el = nameRef.current;
     if (!el) return;
@@ -79,7 +78,6 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  // GSAP: grid parallax drift
   useEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -100,7 +98,6 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
-  // Split name into individual characters
   const nameChars = useMemo(() => {
     const name = "Shivam Nauriyal";
     return name.split("").map((char, i) => (
@@ -125,29 +122,20 @@ export default function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ paddingTop: "80px" }}
     >
-      {/* Animated grid background */}
       <div ref={gridRef} className="grid-bg" />
-
-      {/* Ambient glow orbs */}
       <div className="hero-glow hero-glow-orange" />
       <div className="hero-glow hero-glow-green" />
-
-      {/* Ambient effects — ripples + particles */}
       <HeroEffects />
 
-      {/* Radial gradient overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background:
-            "radial-gradient(ellipse at center, transparent 0%, var(--c-bg) 70%)",
+          background: "radial-gradient(ellipse at center, transparent 0%, var(--c-bg) 70%)",
           zIndex: 1,
         }}
       />
 
-      {/* Content */}
       <div className="relative z-10 text-center px-6" style={{ maxWidth: "900px" }}>
-        {/* Greeting */}
         <BlurReveal delay={0}>
           <p
             className="text-sm uppercase tracking-[0.3em] mb-6"
@@ -157,7 +145,6 @@ export default function Hero() {
           </p>
         </BlurReveal>
 
-        {/* Name — GSAP char stagger */}
         <h1
           ref={nameRef}
           className="text-hero mb-6"
@@ -166,7 +153,6 @@ export default function Hero() {
           {nameChars}
         </h1>
 
-        {/* Role — typewriter */}
         <BlurReveal delay={0.8}>
           <p
             className="text-xl md:text-2xl mb-4"
@@ -181,7 +167,6 @@ export default function Hero() {
           </p>
         </BlurReveal>
 
-        {/* Tagline */}
         <BlurReveal delay={1.0} className="flex justify-center">
           <p
             className="text-base md:text-lg mb-12 mx-auto"
@@ -196,7 +181,6 @@ export default function Hero() {
           </p>
         </BlurReveal>
 
-        {/* CTAs */}
         <BlurReveal delay={1.2}>
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <button
@@ -230,10 +214,7 @@ export default function Hero() {
         </BlurReveal>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator z-10"
-      >
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator z-10">
         <svg
           width="24"
           height="24"

@@ -1,34 +1,33 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 export default function ProjectModal({ project, onClose }) {
   if (!project) return null;
 
   return (
-    <AnimatePresence>
+    <motion.div
+      className="modal-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1, transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } }}
+      exit={{ opacity: 0, transition: { duration: 0.15, ease: "easeOut" } }}
+      onClick={onClose}
+    >
       <motion.div
-        className="modal-overlay"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.15 }}
-        onClick={onClose}
-        key="modal-overlay"
+        layoutId={`project-card-${project.id}`}
+        className="glass-modal relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+        style={{ padding: "48px" }}
+        initial={{ opacity: 0, filter: "blur(10px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)", transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } }}
+        exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.1 } }}
+        transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
       >
         <motion.div
-          layoutId={`project-card-${project.id}`}
-          className="glass-modal relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto"
-          onClick={(e) => e.stopPropagation()}
-          style={{ padding: "48px" }}
-          initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 0.95, filter: "blur(6px)" }}
-          transition={{
-            duration: 0.2,
-            ease: [0.4, 0, 0.2, 1],
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { delay: 0.1, duration: 0.3 } }}
+          exit={{ opacity: 0, transition: { duration: 0.05 } }}
+          className="w-full h-full"
         >
-          {/* Close button */}
-          <button
+        <button
             onClick={onClose}
             className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
             style={{
@@ -48,7 +47,6 @@ export default function ProjectModal({ project, onClose }) {
             </svg>
           </button>
 
-          {/* Number */}
           <span
             className="text-mono text-sm block mb-4"
             style={{ color: "var(--c-muted)" }}
@@ -56,7 +54,6 @@ export default function ProjectModal({ project, onClose }) {
             {project.number}
           </span>
 
-          {/* Title */}
           <h2
             className="font-heading text-3xl md:text-4xl mb-6"
             style={{
@@ -69,7 +66,6 @@ export default function ProjectModal({ project, onClose }) {
             {project.title}
           </h2>
 
-          {/* Tier indicator */}
           {project.tier === 1 && (
             <div className="flex items-center gap-2 mb-6">
               <span className="tier-dot" />
@@ -82,7 +78,6 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           )}
 
-          {/* Description */}
           <p
             className="text-base leading-relaxed mb-8"
             style={{ color: "var(--c-muted)", lineHeight: 1.8, fontSize: "15px" }}
@@ -90,7 +85,6 @@ export default function ProjectModal({ project, onClose }) {
             {project.fullDesc}
           </p>
 
-          {/* Tech stack */}
           <div className="mb-8">
             <span
               className="text-xs uppercase tracking-wider block mb-3"
@@ -107,7 +101,6 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           </div>
 
-          {/* GitHub link */}
           <a
             href={project.github}
             target="_blank"
@@ -129,6 +122,6 @@ export default function ProjectModal({ project, onClose }) {
           </a>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </motion.div>
   );
 }

@@ -143,10 +143,10 @@ export default function About() {
           <div
             className="flex items-center flex-shrink-0"
             style={{
-              width: "110vw",
+              width: "100vw",
               height: "100vh",
               paddingLeft: "80px",
-              paddingRight: "120px",
+              paddingRight: "200px",
             }}
           >
             {/* Left column: heading (mirrors Panel 1 "About Me" alignment) */}
@@ -179,7 +179,7 @@ export default function About() {
 
             {/* Right: skill cards grid — 3 columns × 2 rows */}
             <div
-              className="grid grid-cols-2 lg:grid-cols-3 gap-5"
+              className="grid grid-cols-2 lg:grid-cols-3 gap-5 mt-12"
               style={{
                 flex: 1,
                 maxWidth: "1000px",
@@ -189,7 +189,7 @@ export default function About() {
             >
               {skillCategories.map((cat, catIndex) => (
                 <BlurReveal key={cat.category} delay={catIndex * 0.08}>
-                  <div className="skill-category glass p-5" style={{ borderRadius: "16px" }}>
+                  <div className="skill-category glass p-4" style={{ borderRadius: "16px" }}>
                     <h3
                       className="text-sm uppercase tracking-wider mb-3"
                       style={{

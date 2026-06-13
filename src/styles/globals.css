@@ -1,13 +1,9 @@
-/* ═══════════════════════════════════════════════════════════
-   FONTS — must come before @import "tailwindcss"
-   ═══════════════════════════════════════════════════════════ */
+/* Fonts — must come before tailwindcss import */
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @import "tailwindcss";
 
-/* ═══════════════════════════════════════════════════════════
-   TAILWIND v4 THEME — CSS-first config
-   ═══════════════════════════════════════════════════════════ */
+/* Tailwind v4 theme tokens */
 @theme {
   --font-heading: "Outfit", sans-serif;
   --font-body: "Inter", sans-serif;
@@ -25,9 +21,7 @@
   --color-glass-shadow: var(--c-glass-shadow);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   CSS CUSTOM PROPERTIES — DARK (default)
-   ═══════════════════════════════════════════════════════════ */
+/* Dark theme (default) */
 :root {
   --c-bg: #080808;
   --c-surface: #111111;
@@ -39,8 +33,8 @@
   --c-grid-opacity: 0.7;
   --c-modal-bg: rgba(17, 17, 17, 0.95);
   --c-modal-border: rgba(255, 255, 255, 0.12);
-  --c-ripple-color: rgba(249, 115, 22, 0.15);
-  --c-particle-color: rgba(240, 240, 240, 0.3);
+  --c-ripple-color: rgba(249, 115, 22, 0.35);
+  --c-particle-color: rgba(240, 240, 240, 0.5);
   --c-glass-bg: rgba(255, 255, 255, 0.04);
   --c-glass-border: rgba(255, 255, 255, 0.08);
   --c-glass-shadow: rgba(0, 0, 0, 0.3);
@@ -51,9 +45,7 @@
   color-scheme: dark;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   LIGHT MODE
-   ═══════════════════════════════════════════════════════════ */
+/* Light theme */
 :root.light {
   --c-bg: #F8F8F5;
   --c-surface: #FFFFFF;
@@ -65,8 +57,8 @@
   --c-grid-opacity: 0.8;
   --c-modal-bg: rgba(255, 255, 255, 0.95);
   --c-modal-border: rgba(0, 0, 0, 0.12);
-  --c-ripple-color: rgba(249, 115, 22, 0.12);
-  --c-particle-color: rgba(10, 10, 10, 0.2);
+  --c-ripple-color: rgba(249, 115, 22, 0.25);
+  --c-particle-color: rgba(10, 10, 10, 0.35);
   --c-glass-bg: rgba(255, 255, 255, 0.55);
   --c-glass-border: rgba(0, 0, 0, 0.08);
   --c-glass-shadow: rgba(0, 0, 0, 0.08);
@@ -77,9 +69,7 @@
   color-scheme: light;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   BASE STYLES
-   ═══════════════════════════════════════════════════════════ */
+/* Base reset — inside @layer so Tailwind utilities can override */
 @layer base {
   *,
   *::before,
@@ -105,7 +95,6 @@ body {
               color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Noise grain overlay for cinematic texture */
 body::after {
   content: "";
   position: fixed;
@@ -117,32 +106,14 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SCROLLBAR
-   ═══════════════════════════════════════════════════════════ */
-::-webkit-scrollbar {
-  width: 6px;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--c-glass-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--c-muted); }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--c-glass-border);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--c-muted);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   TYPOGRAPHY
-   ═══════════════════════════════════════════════════════════ */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-}
+/* Typography */
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 
 .text-hero {
   font-size: clamp(56px, 9vw, 112px);
@@ -158,13 +129,9 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-.text-mono {
-  font-family: var(--font-mono);
-}
+.text-mono { font-family: var(--font-mono); }
 
-/* ═══════════════════════════════════════════════════════════
-   LIQUID GLASS
-   ═══════════════════════════════════════════════════════════ */
+/* Glass components */
 .glass {
   background: var(--c-glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
@@ -226,9 +193,20 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 8px 32px var(--c-glass-shadow);
 }
 
-/* ═══════════════════════════════════════════════════════════
-   GRID BACKGROUND
-   ═══════════════════════════════════════════════════════════ */
+.glass-modal {
+  background: var(--c-modal-bg);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--c-modal-border);
+  border-radius: 20px;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Grid background */
 .grid-bg {
   position: fixed;
   inset: 0;
@@ -243,7 +221,7 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 20%, transparent 70%);
 }
 
-/* Hero section glow effects */
+/* Hero glow orbs */
 .hero-glow {
   position: absolute;
   width: 600px;
@@ -269,7 +247,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.06;
 }
 
-/* CTA button enhancements */
+/* CTA button */
 .cta-primary {
   position: relative;
   overflow: hidden;
@@ -284,11 +262,8 @@ h1, h2, h3, h4, h5, h6 {
   transition: opacity 0.3s ease;
 }
 
-.cta-primary:hover::before {
-  opacity: 1;
-}
+.cta-primary:hover::before { opacity: 1; }
 
-/* Section divider gradient */
 .section-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--c-glass-border), transparent);
@@ -296,9 +271,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   STATUS DOT (green pulse)
-   ═══════════════════════════════════════════════════════════ */
+/* Status dot */
 .status-dot {
   width: 10px;
   height: 10px;
@@ -323,9 +296,7 @@ h1, h2, h3, h4, h5, h6 {
   50% { transform: scale(1.8); opacity: 0; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SCROLL INDICATOR
-   ═══════════════════════════════════════════════════════════ */
+/* Scroll indicator */
 .scroll-indicator {
   animation: scroll-bounce 2.5s ease-in-out infinite;
 }
@@ -335,9 +306,7 @@ h1, h2, h3, h4, h5, h6 {
   50% { transform: translateY(12px); opacity: 1; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   TYPEWRITER CURSOR
-   ═══════════════════════════════════════════════════════════ */
+/* Typewriter cursor */
 .typewriter-cursor {
   display: inline-block;
   width: 2px;
@@ -353,9 +322,7 @@ h1, h2, h3, h4, h5, h6 {
   51%, 100% { opacity: 0; }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   IN-PROGRESS PULSE RING
-   ═══════════════════════════════════════════════════════════ */
+/* In-progress pulse */
 .wip-ring {
   position: absolute;
   top: 16px;
@@ -374,41 +341,14 @@ h1, h2, h3, h4, h5, h6 {
   100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
 }
 
-/* ═══════════════════════════════════════════════════════════
-   SECTION UTILITIES
-   ═══════════════════════════════════════════════════════════ */
-.section-padding {
-  padding: 80px 24px;
-}
+/* Section layout utilities */
+.section-padding { padding: 80px 24px; }
+@media (min-width: 768px) { .section-padding { padding: 100px 48px; } }
+@media (min-width: 1280px) { .section-padding { padding: 120px 80px; } }
+.section-max { max-width: 1400px; margin: 0 auto; }
 
-@media (min-width: 768px) {
-  .section-padding {
-    padding: 100px 48px;
-  }
-}
+::selection { background: var(--c-orange); color: #fff; }
 
-@media (min-width: 1280px) {
-  .section-padding {
-    padding: 120px 80px;
-  }
-}
-
-.section-max {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   SELECTION
-   ═══════════════════════════════════════════════════════════ */
-::selection {
-  background: var(--c-orange);
-  color: #fff;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   TIER BADGE
-   ═══════════════════════════════════════════════════════════ */
 .tier-dot {
   width: 6px;
   height: 6px;
@@ -417,42 +357,22 @@ h1, h2, h3, h4, h5, h6 {
   flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   CERT LOGO SPIN
-   ═══════════════════════════════════════════════════════════ */
-.cert-logo {
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* Cert card hover spin */
+.cert-logo { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.cert-card:hover .cert-logo { transform: rotate(360deg); }
 
-.cert-card:hover .cert-logo {
-  transform: rotate(360deg);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   CUSTOM CURSOR (hidden on touch)
-   ═══════════════════════════════════════════════════════════ */
+/* Custom cursor — hidden on touch devices */
 @media (pointer: fine) {
-  body {
-    cursor: none;
-  }
-
-  a, button, [data-hoverable] {
-    cursor: none;
-  }
+  body { cursor: none; }
+  a, button, [data-hoverable] { cursor: none; }
 }
 
 @media (pointer: coarse) {
-  .custom-cursor {
-    display: none !important;
-  }
+  .custom-cursor { display: none !important; }
 }
 
-/* Horizontal scroll section pin */
-.horizontal-scroll-wrapper {
-  overflow: hidden;
-}
+.horizontal-scroll-wrapper { overflow: hidden; }
 
-/* Project modal overlay */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -465,9 +385,6 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   MAGNETIC BUTTON
-   ═══════════════════════════════════════════════════════════ */
 .magnetic-btn {
   position: relative;
   display: inline-flex;
@@ -483,29 +400,9 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.3s ease;
 }
 
-.magnetic-btn:hover {
-  color: var(--c-orange);
-}
+.magnetic-btn:hover { color: var(--c-orange); }
 
-/* ═══════════════════════════════════════════════════════════
-   GLASS MODAL — high-contrast project modal
-   ═══════════════════════════════════════════════════════════ */
-.glass-modal {
-  background: var(--c-modal-bg);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid var(--c-modal-border);
-  border-radius: 20px;
-  box-shadow:
-    0 24px 80px rgba(0, 0, 0, 0.4),
-    0 0 1px rgba(255, 255, 255, 0.1) inset;
-  transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   HERO EFFECTS — ambient pulse ripples + floating particles
-   ═══════════════════════════════════════════════════════════ */
+/* Hero ambient effects */
 .hero-effects-layer {
   position: absolute;
   inset: 0;
@@ -514,58 +411,35 @@ h1, h2, h3, h4, h5, h6 {
   overflow: hidden;
 }
 
-/* Grid pulse ripple */
 .hero-ripple {
   position: absolute;
   width: 0;
   height: 0;
   border-radius: 50%;
-  border: 1px solid var(--c-ripple-color);
+  border: 1.5px solid var(--c-ripple-color);
   transform: translate(-50%, -50%);
-  animation: hero-ripple-expand 2.5s ease-out forwards;
+  animation: hero-ripple-expand 2.2s ease-out forwards;
   will-change: width, height, opacity;
 }
 
 @keyframes hero-ripple-expand {
-  0% {
-    width: 0;
-    height: 0;
-    opacity: 0.8;
-    border-width: 2px;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    width: 300px;
-    height: 300px;
-    opacity: 0;
-    border-width: 0.5px;
-  }
+  0% { width: 0; height: 0; opacity: 1; border-width: 2.5px; }
+  40% { opacity: 0.6; }
+  100% { width: 500px; height: 500px; opacity: 0; border-width: 0.5px; }
 }
 
-/* Floating particle */
 .hero-particle {
   position: absolute;
   border-radius: 50%;
   background: var(--c-particle-color);
+  box-shadow: 0 0 6px 1px var(--c-particle-color);
   animation: hero-particle-float linear forwards;
   will-change: transform, opacity;
 }
 
 @keyframes hero-particle-float {
-  0% {
-    transform: translate(0, 0);
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.6;
-  }
-  85% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: translate(var(--drift), -200px);
-    opacity: 0;
-  }
+  0% { transform: translate(0, 0); opacity: 0; }
+  15% { opacity: 0.8; }
+  75% { opacity: 0.4; }
+  100% { transform: translate(var(--drift), -250px); opacity: 0; }
 }

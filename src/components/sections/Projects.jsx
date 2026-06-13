@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import BlurReveal from "../ui/BlurReveal.jsx";
 import ProjectModal from "../ui/ProjectModal.jsx";
 import { completedProjects } from "../../data/projects.js";
@@ -13,14 +13,15 @@ export default function Projects() {
   const trackRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // GSAP horizontal scroll
   useEffect(() => {
     const section = sectionRef.current;
     const track = trackRef.current;
     if (!section || !track) return;
 
     const ctx = gsap.context(() => {
+      // Add 5% extra scroll distance so track scrolls slightly past visible cards
       const totalScroll = track.scrollWidth - window.innerWidth;
+      const extraScroll = totalScroll + window.innerWidth * 0.05;
 
       gsap.to(track, {
         x: -totalScroll,
@@ -28,7 +29,7 @@ export default function Projects() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${totalScroll}`,
+          end: () => `+=${extraScroll}`,
           scrub: 1.5,
           pin: true,
           anticipatePin: 1,
@@ -40,21 +41,17 @@ export default function Projects() {
     return () => ctx.revert();
   }, []);
 
-  // Lock body scroll when modal is open
   useEffect(() => {
     if (selectedProject) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [selectedProject]);
 
   return (
     <section id="projects" ref={sectionRef} className="relative overflow-hidden">
-      {/* Section header */}
       <div
         className="absolute top-0 left-0 z-10 px-6 md:px-12 lg:px-20"
         style={{ paddingTop: "100px" }}
@@ -75,7 +72,6 @@ export default function Projects() {
         </BlurReveal>
       </div>
 
-      {/* Horizontal track */}
       <div
         ref={trackRef}
         className="flex items-center"
@@ -88,10 +84,9 @@ export default function Projects() {
           paddingTop: "40px",
         }}
       >
-        {/* Spacer for header */}
         <div className="flex-shrink-0" style={{ width: "280px" }} />
 
-        {completedProjects.map((project, i) => (
+        {completedProjects.map((project) => (
           <motion.div
             key={project.id}
             layoutId={`project-card-${project.id}`}
@@ -113,18 +108,14 @@ export default function Projects() {
               transition: { duration: 0.3, ease: "easeOut" },
             }}
             whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.08, ease: "easeOut" }}
             data-hoverable
           >
-            {/* Tier indicator */}
             {project.tier === 1 && (
-              <div
-                className="absolute top-6 right-6 tier-dot"
-                title="Featured"
-              />
+              <div className="absolute top-6 right-6 tier-dot" title="Featured" />
             )}
 
             <div>
-              {/* Number */}
               <span
                 className="text-mono text-sm block mb-6"
                 style={{ color: "var(--c-muted)", fontFamily: "var(--font-mono)", fontSize: "13px" }}
@@ -132,7 +123,6 @@ export default function Projects() {
                 {project.number}
               </span>
 
-              {/* Title */}
               <h3
                 className="text-2xl mb-4"
                 style={{
@@ -145,7 +135,6 @@ export default function Projects() {
                 {project.title}
               </h3>
 
-              {/* Description */}
               <p
                 className="text-sm leading-relaxed"
                 style={{ color: "var(--c-muted)", lineHeight: 1.7 }}
@@ -154,7 +143,6 @@ export default function Projects() {
               </p>
             </div>
 
-            {/* Tech stack pills */}
             <div className="flex flex-wrap gap-2 mt-6">
               {project.techStack.slice(0, 4).map((tech) => (
                 <span key={tech} className="glass-pill" style={{ fontSize: "11px", padding: "4px 12px" }}>
@@ -174,13 +162,14 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Project Modal */}
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

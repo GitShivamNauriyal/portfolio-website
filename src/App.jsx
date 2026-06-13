@@ -3,13 +3,11 @@ import Navbar from "./components/layout/Navbar.jsx";
 import CustomCursor from "./components/layout/CustomCursor.jsx";
 import Hero from "./components/sections/Hero.jsx";
 
-// Lazy load below-the-fold sections
 const About = lazy(() => import("./components/sections/About.jsx"));
 const CodingStats = lazy(() => import("./components/sections/CodingStats.jsx"));
 const Projects = lazy(() => import("./components/sections/Projects.jsx"));
 const InProgress = lazy(() => import("./components/sections/InProgress.jsx"));
 const Certifications = lazy(() => import("./components/sections/Certifications.jsx"));
-const Skills = null; // Merged into About section
 const Contact = lazy(() => import("./components/sections/Contact.jsx"));
 
 function SectionLoader() {
@@ -56,7 +54,6 @@ export default function App() {
         <Suspense fallback={<SectionLoader />}>
           <Certifications />
         </Suspense>
-
 
         <Suspense fallback={<SectionLoader />}>
           <Contact />
