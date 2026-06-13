@@ -78,10 +78,10 @@ export default function About() {
               {/* Avatar */}
               <BlurReveal className="flex-shrink-0">
                 <div
-                  className="glass overflow-hidden"
+                  className="relative overflow-hidden"
                   style={{
-                    width: "280px",
-                    height: "280px",
+                    width: "320px",
+                    height: "320px",
                     borderRadius: "24px",
                   }}
                 >
@@ -90,6 +90,14 @@ export default function About() {
                     alt="Shivam Nauriyal"
                     className="w-full h-full object-cover"
                     style={{ filter: "grayscale(20%)" }}
+                  />
+                  {/* Vignette Overlay hardcoded to dark background color */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: "radial-gradient(circle, transparent 40%, #080808 100%)",
+                      boxShadow: "inset 0 0 30px #080808"
+                    }}
                   />
                 </div>
               </BlurReveal>
