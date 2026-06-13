@@ -19,22 +19,26 @@ export default function Projects() {
     if (!section || !track) return;
 
     const ctx = gsap.context(() => {
-      // Add 5% extra scroll distance so track scrolls slightly past visible cards
-      const totalScroll = track.scrollWidth - window.innerWidth;
-      const extraScroll = totalScroll + window.innerWidth * 0.05;
+      let mm = gsap.matchMedia();
 
-      gsap.to(track, {
-        x: -totalScroll,
-        ease: "none",
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: () => `+=${extraScroll}`,
-          scrub: 1.5,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
+      mm.add("(min-width: 768px)", () => {
+        // Add 5% extra scroll distance so track scrolls slightly past visible cards
+        const totalScroll = track.scrollWidth - window.innerWidth;
+        const extraScroll = totalScroll + window.innerWidth * 0.05;
+
+        gsap.to(track, {
+          x: -totalScroll,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${extraScroll}`,
+            scrub: 1.5,
+            pin: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
       });
     }, section);
 
@@ -53,7 +57,7 @@ export default function Projects() {
   return (
     <section id="projects" ref={sectionRef} className="relative overflow-hidden">
       <div
-        className="absolute top-0 left-0 z-10 px-6 md:px-12 lg:px-20"
+        className="relative md:absolute top-0 left-0 z-10 px-6 md:px-12 lg:px-20"
         style={{ paddingTop: "100px" }}
       >
         <BlurReveal>
@@ -74,31 +78,16 @@ export default function Projects() {
 
       <div
         ref={trackRef}
-        className="flex items-center"
-        style={{
-          height: "100vh",
-          width: "fit-content",
-          paddingLeft: "60px",
-          paddingRight: "120px",
-          gap: "32px",
-          paddingTop: "40px",
-        }}
+        className="flex flex-col md:flex-row items-center w-full md:w-fit gap-8 md:gap-[32px] pt-12 md:pt-[40px] px-6 md:px-0 md:pl-[60px] md:pr-[120px] h-auto md:h-screen pb-24 md:pb-0"
       >
-        <div className="flex-shrink-0" style={{ width: "280px" }} />
+        <div className="hidden md:block flex-shrink-0" style={{ width: "280px" }} />
 
         {completedProjects.map((project) => (
           <motion.div
             key={project.id}
             layoutId={`project-card-${project.id}`}
-            className="glass flex-shrink-0 relative overflow-hidden"
+            className="glass flex-shrink-0 relative overflow-hidden w-full md:w-[380px] h-auto min-h-[420px] md:h-[480px] p-8 md:p-[32px] flex flex-col justify-between cursor-pointer"
             style={{
-              width: "380px",
-              height: "480px",
-              padding: "32px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              cursor: "pointer",
               willChange: "transform",
             }}
             onClick={() => setSelectedProject(project)}

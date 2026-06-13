@@ -13,9 +13,8 @@ export default function ProjectModal({ project, onClose }) {
     >
       <motion.div
         layoutId={`project-card-${project.id}`}
-        className="glass-modal relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto"
+        className="glass-modal relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto p-6 md:p-[48px]"
         onClick={(e) => e.stopPropagation()}
-        style={{ padding: "48px" }}
         initial={{ opacity: 0, filter: "blur(10px)" }}
         animate={{ opacity: 1, filter: "blur(0px)", transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] } }}
         exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.1 } }}
@@ -27,9 +26,9 @@ export default function ProjectModal({ project, onClose }) {
           exit={{ opacity: 0, transition: { duration: 0.05 } }}
           className="w-full h-full"
         >
-        <button
+          <button
             onClick={onClose}
-            className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+            className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
             style={{
               background: "var(--c-glass-bg)",
               border: "1px solid var(--c-glass-border)",

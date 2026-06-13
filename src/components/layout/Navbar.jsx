@@ -39,11 +39,15 @@ export default function Navbar() {
 
   const handleNavClick = useCallback((e, href) => {
     e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      setMobileOpen(false);
-    }
+    setMobileOpen(false); // Close menu immediately on tap
+
+    // Add a tiny delay so the menu closing animation doesn't cancel the mobile smooth scroll
+    setTimeout(() => {
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 50);
   }, []);
 
   return (
@@ -225,7 +229,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="text-lg"
+                  className="text-lg block w-full py-2"
                   style={{
                     fontFamily: "var(--font-heading)",
                     fontWeight: 300,

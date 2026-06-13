@@ -119,8 +119,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ paddingTop: "80px" }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-[120px] md:pt-[80px]"
     >
       <div ref={gridRef} className="grid-bg" />
       <div className="hero-glow hero-glow-orange" />
@@ -182,7 +181,7 @@ export default function Hero() {
         </BlurReveal>
 
         <BlurReveal delay={1.2}>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
             <button
               onClick={() => handleScrollTo("#projects")}
               className="glass cta-primary px-8 py-3.5 rounded-full text-sm font-medium"
