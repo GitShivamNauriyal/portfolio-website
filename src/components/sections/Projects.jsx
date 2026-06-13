@@ -57,11 +57,11 @@ export default function Projects() {
       {/* Section header */}
       <div
         className="absolute top-0 left-0 z-10 px-6 md:px-12 lg:px-20"
-        style={{ paddingTop: "80px" }}
+        style={{ paddingTop: "100px" }}
       >
         <BlurReveal>
           <p
-            className="text-xs uppercase tracking-[0.3em] mb-4"
+            className="text-xs uppercase tracking-[0.3em] mb-2"
             style={{ color: "var(--c-orange)", fontFamily: "var(--font-mono)" }}
           >
             Selected Work

@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import BlurReveal from "../ui/BlurReveal.jsx";
+import HeroEffects from "../ui/HeroEffects.jsx";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,6 +131,9 @@ export default function Hero() {
       {/* Ambient glow orbs */}
       <div className="hero-glow hero-glow-orange" />
       <div className="hero-glow hero-glow-green" />
+
+      {/* Ambient effects — ripples + particles */}
+      <HeroEffects />
 
       {/* Radial gradient overlay */}
       <div

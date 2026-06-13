@@ -1,25 +1,25 @@
 export const codingPlatforms = [
   {
     platform: "LeetCode",
-    handle: "shivam_nauriyal",
-    profileUrl: "https://leetcode.com/shivam_nauriyal",
+    handle: "shivamxy",
+    profileUrl: "https://leetcode.com/shivamxy",
     featured: true,
     stats: [
-      { label: "Problems Solved", value: 450, suffix: "+" },
-      { label: "Contest Rating", value: 1847 },
-      { label: "Global Ranking", value: 28500, prefix: "~" },
-      { label: "Max Streak", value: 120, suffix: " days" },
+      { label: "Problems Solved", value: 435, suffix: "/3958" },
+      { label: "Contest Rating", value: 1807 },
+      { label: "Global Ranking", value: 65566, prefix: "~" },
+      { label: "Max Streak", value: 33, suffix: " days" },
     ],
     breakdown: {
-      easy: 180,
-      medium: 210,
-      hard: 60,
+      easy: 131,
+      medium: 258,
+      hard: 46,
     },
   },
   {
     platform: "Codeforces",
     handle: "shivam_n",
-    profileUrl: "https://codeforces.com/profile/shivam_n",
+    profileUrl: "https://codeforces.com/profile/Nauriyal_Shivam",
     featured: false,
     stats: [
       { label: "Rating", value: 1520 },

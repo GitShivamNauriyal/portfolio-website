@@ -10,18 +10,22 @@ export default function ProjectModal({ project, onClose }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
+        transition={{ duration: 0.15 }}
         onClick={onClose}
         key="modal-overlay"
       >
         <motion.div
           layoutId={`project-card-${project.id}`}
-          className="glass relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto"
+          className="glass-modal relative w-full max-w-3xl mx-4 max-h-[85vh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
           style={{ padding: "48px" }}
           initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-          transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          exit={{ opacity: 0, scale: 0.95, filter: "blur(6px)" }}
+          transition={{
+            duration: 0.2,
+            ease: [0.4, 0, 0.2, 1],
+          }}
         >
           {/* Close button */}
           <button

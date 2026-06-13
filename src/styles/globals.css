@@ -35,7 +35,12 @@
   --c-muted: #666666;
   --c-green: #22C55E;
   --c-orange: #F97316;
-  --c-line: rgba(255, 255, 255, 0.06);
+  --c-line: rgba(255, 255, 255, 0.10);
+  --c-grid-opacity: 0.7;
+  --c-modal-bg: rgba(17, 17, 17, 0.95);
+  --c-modal-border: rgba(255, 255, 255, 0.12);
+  --c-ripple-color: rgba(249, 115, 22, 0.15);
+  --c-particle-color: rgba(240, 240, 240, 0.3);
   --c-glass-bg: rgba(255, 255, 255, 0.04);
   --c-glass-border: rgba(255, 255, 255, 0.08);
   --c-glass-shadow: rgba(0, 0, 0, 0.3);
@@ -56,7 +61,12 @@
   --c-muted: #999999;
   --c-green: #16A34A;
   --c-orange: #EA6C00;
-  --c-line: rgba(0, 0, 0, 0.05);
+  --c-line: rgba(0, 0, 0, 0.08);
+  --c-grid-opacity: 0.8;
+  --c-modal-bg: rgba(255, 255, 255, 0.95);
+  --c-modal-border: rgba(0, 0, 0, 0.12);
+  --c-ripple-color: rgba(249, 115, 22, 0.12);
+  --c-particle-color: rgba(10, 10, 10, 0.2);
   --c-glass-bg: rgba(255, 255, 255, 0.55);
   --c-glass-border: rgba(0, 0, 0, 0.08);
   --c-glass-shadow: rgba(0, 0, 0, 0.08);
@@ -228,7 +238,7 @@ h1, h2, h3, h4, h5, h6 {
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.5;
+  opacity: var(--c-grid-opacity);
   mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 20%, transparent 70%);
   -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 20%, transparent 70%);
 }
@@ -368,18 +378,18 @@ h1, h2, h3, h4, h5, h6 {
    SECTION UTILITIES
    ═══════════════════════════════════════════════════════════ */
 .section-padding {
-  padding: 120px 24px;
+  padding: 80px 24px;
 }
 
 @media (min-width: 768px) {
   .section-padding {
-    padding: 160px 48px;
+    padding: 100px 48px;
   }
 }
 
 @media (min-width: 1280px) {
   .section-padding {
-    padding: 200px 80px;
+    padding: 120px 80px;
   }
 }
 
@@ -475,4 +485,87 @@ h1, h2, h3, h4, h5, h6 {
 
 .magnetic-btn:hover {
   color: var(--c-orange);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GLASS MODAL — high-contrast project modal
+   ═══════════════════════════════════════════════════════════ */
+.glass-modal {
+  background: var(--c-modal-bg);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid var(--c-modal-border);
+  border-radius: 20px;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.4),
+    0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   HERO EFFECTS — ambient pulse ripples + floating particles
+   ═══════════════════════════════════════════════════════════ */
+.hero-effects-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Grid pulse ripple */
+.hero-ripple {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  border: 1px solid var(--c-ripple-color);
+  transform: translate(-50%, -50%);
+  animation: hero-ripple-expand 2.5s ease-out forwards;
+  will-change: width, height, opacity;
+}
+
+@keyframes hero-ripple-expand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0.8;
+    border-width: 2px;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    border-width: 0.5px;
+  }
+}
+
+/* Floating particle */
+.hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--c-particle-color);
+  animation: hero-particle-float linear forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes hero-particle-float {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.6;
+  }
+  85% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate(var(--drift), -200px);
+    opacity: 0;
+  }
 }

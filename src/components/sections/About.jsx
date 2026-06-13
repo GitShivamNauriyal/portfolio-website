@@ -32,12 +32,34 @@ export default function About() {
           invalidateOnRefresh: true,
         },
       });
+
+      // Staggered pill animations for skill pills in Panel 2
+      const skillPanelCats = section.querySelectorAll(".skill-category");
+      skillPanelCats.forEach((cat) => {
+        const pills = cat.querySelectorAll(".skill-pill-anim");
+        gsap.fromTo(
+          pills,
+          { opacity: 0, y: 16, filter: "blur(6px)" },
+          {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            stagger: 0.04,
+            duration: 0.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: cat,
+              start: "left 80%",
+              containerAnimation: gsap.getById?.("about-scroll") || undefined,
+              once: true,
+            },
+          }
+        );
+      });
     }, section);
 
     return () => ctx.revert();
   }, []);
-
-  const aboutSkills = skillCategories.slice(0, 4); // Show first 4 categories
 
   return (
     <section id="about" ref={sectionRef}>
@@ -64,7 +86,7 @@ export default function About() {
                   }}
                 >
                   <img
-                    src="/images/avatar.png"
+                    src="/images/pfp_1x1.jpg"
                     alt="Shivam Nauriyal"
                     className="w-full h-full object-cover"
                     style={{ filter: "grayscale(20%)" }}
@@ -117,12 +139,25 @@ export default function About() {
             </div>
           </div>
 
-          {/* Panel 2: Skills grid */}
+          {/* Panel 2: Skills grid — ALL categories */}
           <div
-            className="flex items-center justify-center flex-shrink-0 px-6 md:px-20"
-            style={{ width: "100vw", height: "100vh" }}
+            className="flex items-center flex-shrink-0"
+            style={{
+              width: "110vw",
+              height: "100vh",
+              paddingLeft: "80px",
+              paddingRight: "120px",
+            }}
           >
-            <div style={{ maxWidth: "1000px", width: "100%" }}>
+            {/* Left column: heading (mirrors Panel 1 "About Me" alignment) */}
+            <div
+              className="flex-shrink-0 flex flex-col justify-center"
+              style={{
+                width: "320px",
+                marginRight: "60px",
+                height: "100%",
+              }}
+            >
               <BlurReveal>
                 <p
                   className="text-xs uppercase tracking-[0.3em] mb-4"
@@ -131,42 +166,55 @@ export default function About() {
                   Tech Stack
                 </p>
                 <h2
-                  className="text-section-title mb-12"
+                  className="text-section-title"
                   style={{ fontFamily: "var(--font-heading)", color: "var(--c-text)" }}
                 >
-                  What I work with
+                  What I
+                  <br />
+                  work
+                  <span style={{ color: "var(--c-orange)" }}> with</span>
                 </h2>
               </BlurReveal>
+            </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {aboutSkills.map((cat, catIndex) => (
-                  <BlurReveal key={cat.category} delay={catIndex * 0.1}>
-                    <div className="glass p-6" style={{ borderRadius: "16px" }}>
-                      <h3
-                        className="text-sm uppercase tracking-wider mb-4"
-                        style={{
-                          color: "var(--c-text)",
-                          fontFamily: "var(--font-mono)",
-                          fontWeight: 500,
-                          fontSize: "12px",
-                        }}
-                      >
-                        {cat.category}
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {cat.skills.map((skill, skillIndex) => (
-                          <BlurReveal
-                            key={skill}
-                            delay={catIndex * 0.1 + skillIndex * 0.03}
-                          >
-                            <span className="glass-pill">{skill}</span>
-                          </BlurReveal>
-                        ))}
-                      </div>
+            {/* Right: skill cards grid — 3 columns × 2 rows */}
+            <div
+              className="grid grid-cols-2 lg:grid-cols-3 gap-5"
+              style={{
+                flex: 1,
+                maxWidth: "1000px",
+                alignContent: "center",
+                height: "fit-content",
+              }}
+            >
+              {skillCategories.map((cat, catIndex) => (
+                <BlurReveal key={cat.category} delay={catIndex * 0.08}>
+                  <div className="skill-category glass p-5" style={{ borderRadius: "16px" }}>
+                    <h3
+                      className="text-sm uppercase tracking-wider mb-3"
+                      style={{
+                        color: "var(--c-orange)",
+                        fontFamily: "var(--font-mono)",
+                        fontWeight: 500,
+                        fontSize: "11px",
+                      }}
+                    >
+                      {cat.category}
+                    </h3>
+                    <div className="flex flex-wrap gap-1.5">
+                      {cat.skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="glass-pill skill-pill-anim"
+                          style={{ fontSize: "12px", padding: "4px 12px" }}
+                        >
+                          {skill}
+                        </span>
+                      ))}
                     </div>
-                  </BlurReveal>
-                ))}
-              </div>
+                  </div>
+                </BlurReveal>
+              ))}
             </div>
           </div>
         </div>
