@@ -178,7 +178,7 @@ export default function Hero() {
         </BlurReveal>
 
         {/* Tagline */}
-        <BlurReveal delay={1.0}>
+        <BlurReveal delay={1.0} className="flex justify-center">
           <p
             className="text-base md:text-lg mb-12 mx-auto"
             style={{

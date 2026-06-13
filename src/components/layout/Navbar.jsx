@@ -54,10 +54,11 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <div
-        className="flex items-center justify-between mx-auto"
+        className="flex items-center justify-between"
         style={{
           maxWidth: "1400px",
           padding: "16px 24px",
+          margin: "0 auto",
         }}
       >
         {/* Logo */}

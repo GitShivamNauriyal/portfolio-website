@@ -53,7 +53,7 @@ function MagneticButton({ href, label, icon }) {
       rel="noopener noreferrer"
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className="glass flex items-center gap-3 px-6 py-4 rounded-2xl"
+      className="glass flex items-center gap-3 px-8 py-6 rounded-2xl"
       style={{
         textDecoration: "none",
         color: "var(--c-muted)",
@@ -73,7 +73,10 @@ function MagneticButton({ href, label, icon }) {
 
 export default function Contact() {
   return (
-    <section id="contact" className="section-padding relative">
+    <section id="contact" className="section-padding relative"
+      style={{
+        paddingBottom: "4rem",
+      }}>
       <div className="section-max text-center">
         {/* Status */}
         <BlurReveal>
@@ -99,10 +102,10 @@ export default function Contact() {
           </h2>
         </BlurReveal>
 
-        <BlurReveal delay={0.2}>
+        <BlurReveal delay={0.2} className="flex justify-center py-2">
           <p
             className="text-base mb-12 mx-auto"
-            style={{ color: "var(--c-muted)", maxWidth: "500px", lineHeight: 1.7 }}
+            style={{ color: "var(--c-muted)", maxWidth: "500px", lineHeight: 1.4, marginTop: "4px", marginBottom: "12px" }}
           >
             Whether it's a systems-level challenge, an ML problem, or a wild idea —
             I'm always down to chat.
@@ -111,7 +114,7 @@ export default function Contact() {
 
         {/* Social links */}
         <BlurReveal delay={0.3}>
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-8">
             {socialLinks.map((link) => (
               <MagneticButton key={link.label} {...link} />
             ))}
