@@ -214,7 +214,9 @@ export default function About() {
             >
               {skillCategories.map((cat, catIndex) => (
                 <BlurReveal key={cat.category} delay={catIndex * 0.08}>
-                  <div className="skill-category glass p-4" style={{ borderRadius: "16px" }}>
+                  <div className="skill-category glass p-4 relative" style={{ borderRadius: "16px" }}>
+                    {/* Glassmorphic border beam */}
+                    <div className="card-border-beam" style={{ "--beam-delay": `${catIndex * -1.5}s` }} />
                     <h3
                       className="text-sm uppercase tracking-wider mb-3"
                       style={{

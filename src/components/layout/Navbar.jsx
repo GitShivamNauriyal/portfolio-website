@@ -218,6 +218,9 @@ export default function Navbar() {
             style={{
               margin: "0 16px 16px",
               overflow: "hidden",
+              backdropFilter: "blur(30px) saturate(200%)",
+              WebkitBackdropFilter: "blur(30px) saturate(200%)",
+              backgroundColor: theme === "dark" ? "rgba(0,0,0,0.4)" : "rgba(255,255,255,0.6)"
             }}
           >
             <div className="flex flex-col p-6" style={{ gap: "20px" }}>
