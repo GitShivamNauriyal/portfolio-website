@@ -7,7 +7,7 @@ const About = lazy(() => import("./components/sections/About.jsx"));
 const CodingStats = lazy(() => import("./components/sections/CodingStats.jsx"));
 const Projects = lazy(() => import("./components/sections/Projects.jsx"));
 const InProgress = lazy(() => import("./components/sections/InProgress.jsx"));
-const Certifications = lazy(() => import("./components/sections/Certifications.jsx"));
+// const Certifications = lazy(() => import("./components/sections/Certifications.jsx"));
 const Contact = lazy(() => import("./components/sections/Contact.jsx"));
 
 function SectionLoader() {
@@ -51,9 +51,9 @@ export default function App() {
           <CodingStats />
         </Suspense>
 
-        <Suspense fallback={<SectionLoader />}>
+        {/* <Suspense fallback={<SectionLoader />}>
           <Certifications />
-        </Suspense>
+        </Suspense> */}
 
         <Suspense fallback={<SectionLoader />}>
           <Contact />
